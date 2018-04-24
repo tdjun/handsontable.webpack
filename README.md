@@ -3,11 +3,7 @@
 webpack과 Babel을 이용하여 ES6 프로젝트 생성
 handsontable, handlebars 적용하여 handontable autocomplete2 CellType을 구현
 
-### 프로젝트 생성
-```
-git clone https://github.com/rauschma/webpack-babel-demo
-npm install
-```
+* npm install
 
 * Build once:
     * `npm run build`
