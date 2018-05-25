@@ -10,11 +10,19 @@ var dir_html = path.resolve(__dirname, 'html');
 var dir_build = path.resolve(__dirname, 'build');
 
 module.exports = {
-    entry: path.resolve(dir_js, 'main.js'),
+    entry: {
+        autocomplete2: [path.resolve(dir_js, 'autocomplete2.js')],
+        mergehotgrid1: [path.resolve(dir_js, 'mergehotgrid1.js')],
+        mergehotgrid2: [path.resolve(dir_js, 'mergehotgrid2.js')],
+        bundle: [path.resolve(dir_js, 'main.js')]
+    },
     output: {
         path: dir_build,
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
+    // watchOptions: {
+    //     poll: true
+    // },
     devServer: {
         contentBase: dir_build,
     },
@@ -27,13 +35,19 @@ module.exports = {
             include: /node_modules/,
             loaders: ['style-loader', 'css-loader'],
         }],
-        noParse: [path.join(__dirname, "node_modules/handsontable/dist/handsontable.full.js")]
+        noParse: [
+            path.join(__dirname, "node_modules/handsontable/dist/handsontable.full.js"),
+            path.join(__dirname, "node_modules/tree-model/dist/TreeModel-min.js"),
+        ]
     },
     resolve: {
         alias: {
             'handsontable': path.join(__dirname, 'node_modules/handsontable/dist/handsontable.full.js'),
             'handsontable.css': path.join(__dirname, 'node_modules/handsontable/dist/handsontable.full.css'),
-            "handlebars": path.join(__dirname, '/node_modules/handlebars/dist/handlebars')
+            'handlebars': path.join(__dirname, '/node_modules/handlebars/dist/handlebars'),
+            'TreeModel': path.join(__dirname, '/node_modules/tree-model/dist/TreeModel-min.js'),
+            'moment': path.join(__dirname, '/node_modules/moment/moment.js'),
+            'hot-formula-parser': path.join(__dirname, '/node_modules/hot-formula-parser/dist/formula-parser.js')
         }
     },
     plugins: [
@@ -42,7 +56,9 @@ module.exports = {
             { from: dir_html } // to: output.path
         ]),
         // Avoid publishing files when compilation fails
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        // 한글언어팩만 추가
+        new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ko/)
     ],
     stats: {
         // Nice colored output

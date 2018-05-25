@@ -1,0 +1,6 @@
+.handsontable td.formula {
+    background-color: yellow;
+}
+.handsontable td.formula-error {
+    background-color: red;
+}

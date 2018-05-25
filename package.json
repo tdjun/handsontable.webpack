@@ -24,6 +24,11 @@
   "author": "tdjun",
   "license": "MIT",
   "dependencies": {
-    "handsontable": "^0.38.1"
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "handsontable": "^0.38.1",
+    "hot-formula-parser": "^2.3.3",
+    "moment": "^2.22.1",
+    "tree-model": "^1.0.6"
   }
 }
